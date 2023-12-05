@@ -8,5 +8,13 @@ services:
     volumes:
       - ..:/usr/src
 
+  mysql:
+    image: mysql:latest
+    networks:
+      - workspace
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: django_db
+
 networks:
   workspace:

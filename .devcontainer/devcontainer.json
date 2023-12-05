@@ -12,19 +12,21 @@
 				"ms-python.vscode-pylance",
 				"ms-python.black-formatter",
 				"github.vscode-github-actions",
-				"googlecloudtools.cloudcode",
-				"ms-azuretools.vscode-docker"
+				"ms-azuretools.vscode-docker",
+				"AmazonWebServices.aws-toolkit-vscode"
 			],
 		}
 	},
 	"overrideCommand": true,
 	"remoteUser": "vscode",
 	"mounts": [
-		"source=~/.ssh,target=/home/vscode/.ssh,type=bind"
+		"source=~/.ssh,target=/home/vscode/.ssh,type=bind",
+		"source=~/.aws,target=/home/vscode/.aws,type=bind"
 	],
 	"features": {
 		"ghcr.io/devcontainers/features/common-utils:2": {
 			"installZsh": true,
+			"configureZshAsDefaultShell": true,
 			"installOhMyZsh": true,
 			"installOhMyZshConfig": true,
 			"upgradePackages": true,
@@ -32,15 +34,15 @@
 			"userUid": "automatic",
 			"userGid": "automatic"
 		},
-		"ghcr.io/dhoeric/features/google-cloud-cli:1": {
-			"installGkeGcloudAuthPlugin": true
-		},
 		"ghcr.io/devcontainers/features/docker-in-docker:2": {
 			"moby": true,
 			"azureDnsAutoDetection": true,
 			"installDockerBuildx": true,
 			"version": "latest",
 			"dockerDashComposeVersion": "v1"
+		},
+		"ghcr.io/devcontainers-contrib/features/aws-eb-cli:1": {
+			"version": "latest"
 		}
 	}
 }
