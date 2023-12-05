@@ -3,6 +3,5 @@ from app import views
 
 
 urlpatterns = [
-    path('about/', views.aboutpage, name='about'),
-    path('', views.homepage, name='home'),
+    path('', views.api_root , name='root'),
 ]
