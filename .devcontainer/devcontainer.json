@@ -13,8 +13,9 @@
 				"ms-python.black-formatter",
 				"github.vscode-github-actions",
 				"ms-azuretools.vscode-docker",
-				"AmazonWebServices.aws-toolkit-vscode"
-			],
+				"AmazonWebServices.aws-toolkit-vscode",
+				"rangav.vscode-thunder-client"
+			]
 		}
 	},
 	"overrideCommand": true,
@@ -42,6 +43,9 @@
 			"dockerDashComposeVersion": "v1"
 		},
 		"ghcr.io/devcontainers-contrib/features/aws-eb-cli:1": {
+			"version": "latest"
+		},
+		"ghcr.io/devcontainers-contrib/features/poetry:2": {
 			"version": "latest"
 		}
 	}
