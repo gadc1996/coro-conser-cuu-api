@@ -7,6 +7,8 @@ services:
       - workspace
     volumes:
       - ..:/usr/src
+    environment:
+      - ZDOTDIR=/usr/src/.dotfiles/zsh
 
   mysql:
     image: mysql:latest

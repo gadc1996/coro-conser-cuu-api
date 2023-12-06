@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "django-workspace"
+name = "src"
 version = "0.1.0"
 description = ""
 authors = ["gdelgado <gdelgado@controlla.com.mx>"]
@@ -24,3 +24,5 @@ pylint = "^3.0.2"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
