@@ -275,3 +275,9 @@ pyrightconfig.json
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
 
+.bash_history
+.ssh
+.vscode-server
+.gnupg
+.local
+.devcontainer/*CommandMarker

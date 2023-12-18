@@ -1,54 +1,21 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
 // README at: https://github.com/devcontainers/templates/tree/main/src/docker-existing-docker-compose
 {
-	"name": "Django Workspace",
+	"name": "Dev Container Workspace",
 	"dockerComposeFile": "docker-compose.yml",
 	"service": "app",
-	"workspaceFolder": "/usr/src",
+	"workspaceFolder": "/home/devcontainer",
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				"ms-python.python",
-				"ms-python.vscode-pylance",
-				"ms-python.black-formatter",
-				"github.vscode-github-actions",
-				"ms-azuretools.vscode-docker",
-				"AmazonWebServices.aws-toolkit-vscode",
-				"rangav.vscode-thunder-client",
-				"tamasfe.even-better-toml"
+				"googlecloudtools.cloudcode"
 			]
 		}
 	},
 	"overrideCommand": true,
-	"remoteUser": "vscode",
-	"mounts": [
-		"source=~/.ssh,target=/home/vscode/.ssh,type=bind",
-		"source=~/.aws,target=/home/vscode/.aws,type=bind"
-	],
+	"remoteUser": "devcontainer",
+	"postCreateCommand": "poetry install",
 	"features": {
-		"ghcr.io/devcontainers/features/common-utils:2": {
-			"installZsh": true,
-			"configureZshAsDefaultShell": true,
-			"installOhMyZsh": true,
-			"installOhMyZshConfig": true,
-			"upgradePackages": true,
-			"username": "vscode",
-			"userUid": "automatic",
-			"userGid": "automatic"
-		},
-		"ghcr.io/devcontainers/features/docker-in-docker:2": {
-			"moby": true,
-			"azureDnsAutoDetection": true,
-			"installDockerBuildx": true,
-			"version": "latest",
-			"dockerDashComposeVersion": "v1"
-		},
-		"ghcr.io/devcontainers-contrib/features/aws-eb-cli:1": {
-			"version": "latest"
-		},
-		"ghcr.io/devcontainers-contrib/features/poetry:2": {
-			"version": "latest"
-		}
-	},
-	"postCreateCommand": "poetry install"
+		// "ghcr.io/dhoeric/features/google-cloud-cli:1": {}
+	}
 }
