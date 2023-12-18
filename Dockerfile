@@ -1,21 +1,25 @@
 # Python image to use.
 FROM python:3.11-alpine
 
-# Set the working directory to /app
+# Install system dependencies for mysqlclient
+RUN apk add --no-cache mariadb-dev build-base
+
+RUN pip install poetry
+
 WORKDIR /app
 
-# copy the requirements file used for dependencies
-COPY requirements.txt .
+COPY pyproject.toml poetry.lock /app/
 
-# Install any needed packages specified in requirements.txt
-RUN pip install --trusted-host pypi.python.org -r requirements.txt
-RUN pip install daphne
+RUN  poetry install --with deploy
 
-# Copy the rest of the working directory contents into the container at /app
-COPY . .
+# Copy the rest of the application code to the working directory
+COPY . /app/
 
-
+# Expose the port on which the application will run
 EXPOSE 8080
+
+# Set the working directory to /app/src
 WORKDIR /app/src
-# Run app.py when the container launches
-ENTRYPOINT ["daphne","-b", "0.0.0.0", "-p", "8080", "core.asgi:application"]
+
+# Run Daphne when the container launches
+ENTRYPOINT ["poetry", "run", "daphne", "-b", "0.0.0.0", "-p", "8080", "core.asgi:application"]
