@@ -4,7 +4,7 @@
 	"name": "Dev Container Workspace",
 	"dockerComposeFile": "docker-compose.yml",
 	"service": "app",
-	"workspaceFolder": "/home/devcontainer",
+	"workspaceFolder": "/app",
 	"customizations": {
 		"vscode": {
 			"extensions": [
@@ -12,7 +12,6 @@
 		}
 	},
 	"overrideCommand": true,
-	"remoteUser": "devcontainer",
 	"features": {
-	}
+	},
 }
