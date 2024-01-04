@@ -8,14 +8,11 @@
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				"googlecloudtools.cloudcode"
 			]
 		}
 	},
 	"overrideCommand": true,
 	"remoteUser": "devcontainer",
-	"postCreateCommand": "poetry install",
 	"features": {
-		// "ghcr.io/dhoeric/features/google-cloud-cli:1": {}
 	}
 }
