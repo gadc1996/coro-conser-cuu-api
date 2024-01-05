@@ -4,18 +4,14 @@
 	"name": "Dev Container Workspace",
 	"dockerComposeFile": "docker-compose.yml",
 	"service": "app",
-	"workspaceFolder": "/home/devcontainer",
+	"workspaceFolder": "/app",
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				"googlecloudtools.cloudcode"
 			]
 		}
 	},
 	"overrideCommand": true,
-	"remoteUser": "devcontainer",
-	"postCreateCommand": "poetry install",
 	"features": {
-		// "ghcr.io/dhoeric/features/google-cloud-cli:1": {}
-	}
+	},
 }

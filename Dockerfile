@@ -1,25 +1,19 @@
 # Python image to use.
-FROM python:3.11-alpine
+FROM python:3.12-slim-bullseye
 
-# Install system dependencies for mysqlclient
-RUN apk add --no-cache mariadb-dev build-base
-
-RUN pip install poetry
-
+# Set the working directory to /app
 WORKDIR /app
 
-COPY pyproject.toml poetry.lock /app/
+# copy the requirements file used for dependencies
+COPY requirements.txt .
 
-RUN  poetry install --with deploy
+# Install any needed packages specified in requirements.txt
+RUN pip install --trusted-host pypi.python.org -r requirements.txt
+RUN pip install gunicorn
 
-# Copy the rest of the application code to the working directory
-COPY . /app/
-
-# Expose the port on which the application will run
+# Copy the rest of the working directory contents into the container at /app
+COPY src/. .
 EXPOSE 8080
-
-# Set the working directory to /app/src
-WORKDIR /app/src
-
-# Run Daphne when the container launches
-ENTRYPOINT ["poetry", "run", "daphne", "-b", "0.0.0.0", "-p", "8080", "core.asgi:application"]
+# Run app.py when the container launches
+# ENTRYPOINT ["python", "manage.py", "runserver", "--noreload"]
+ENTRYPOINT ["gunicorn", "--bind", "0.0.0.0:8080", "core.wsgi:application"]

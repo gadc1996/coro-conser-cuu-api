@@ -1,14 +1,30 @@
-FROM python:3.11-bullseye
+FROM python:3.11-slim-bullseye
 
-RUN useradd -m devcontainer
+WORKDIR /app
 
-RUN chsh -s /bin/bash devcontainer
+# Create user with permissions in folder /app
+ARG USERNAME=devcontainer
+RUN useradd -ms /bin/bash $USERNAME && \
+    chown -R $USERNAME:$USERNAME /app
 
-WORKDIR /home/devcontainer
+# Update pip and install requirements
+COPY requirements.txt .
+RUN pip install --upgrade pip && \
+    pip install -r requirements.txt
 
+# Install apt-get packages
 RUN apt-get update && \
-    apt-get install -y git
+    apt-get install -y \
+    git \
+    sudo
 
-RUN pip install poetry
+# add user to sudoers
+RUN echo "$USERNAME ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
-USER devcontainer
+# Add pip to path
+ENV PATH="/home/$USERNAME/.local/bin:${PATH}"
+
+# Copy rest of files
+COPY . .
+
+USER $USERNAME
