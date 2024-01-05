@@ -13,7 +13,7 @@ RUN pip install gunicorn
 
 # Copy the rest of the working directory contents into the container at /app
 COPY src/. .
+
+# Expose port 8080 and run the application
 EXPOSE 8080
-# Run app.py when the container launches
-# ENTRYPOINT ["python", "manage.py", "runserver", "--noreload"]
 ENTRYPOINT ["gunicorn", "--bind", "0.0.0.0:8080", "core.wsgi:application"]
