@@ -24,7 +24,7 @@ jobs:
       env:
         DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
       run: |
-        python -m django check --deploy
+        python src/manage.py check --deploy
         if [[ $? -ne 0 ]]; then
           echo "Django check --deploy failed with warnings"
           exit 1
