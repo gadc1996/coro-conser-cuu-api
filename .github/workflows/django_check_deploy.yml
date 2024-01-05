@@ -22,4 +22,4 @@ jobs:
 
     - name: Django Deploy Check
       run: |
-        python manage.py check --deploy
+        python src/manage.py check --deploy
