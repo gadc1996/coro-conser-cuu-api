@@ -22,4 +22,8 @@ jobs:
 
     - name: Django Deploy Check
       run: |
-        python src/manage.py check --deploy
+        python -m django check --deploy
+        if [[ $? -ne 0 ]]; then
+          echo "Django check --deploy failed with warnings"
+          exit 1
+        fi
