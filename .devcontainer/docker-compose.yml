@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  app:
+    build: 
+      context: ../
+      dockerfile: .devcontainer/Dockerfile
+    networks:
+      - workspace
+    volumes:
+      - ..:/app
+    # Variables used inside the container
+    # environment:
+    #   - ZDOTDIR=/home/devcontainer
+    
+    # Use and env file and create an example file when using external services(credentials, api keys, etc)
+    # env_file:
+    #   - .env
+
+  mysql:
+    image: mysql:latest
+    networks:
+      - workspace
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: django_db
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+    ports:
+      - "8081:80"
+    networks:
+      - workspace
+
+networks:
+  workspace:
