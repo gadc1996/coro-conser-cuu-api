@@ -14,8 +14,8 @@ services:
     #   - ZDOTDIR=/home/devcontainer
     
     # Use and env file and create an example file when using external services(credentials, api keys, etc)
-    # env_file:
-    #   - .env
+    env_file:
+      - .env
 
   mysql:
     image: mysql:latest

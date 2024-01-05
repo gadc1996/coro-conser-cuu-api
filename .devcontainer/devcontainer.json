@@ -8,10 +8,11 @@
 	"customizations": {
 		"vscode": {
 			"extensions": [
+				"GitHub.copilot",
+				"GitHub.vscode-github-actions"
 			]
 		}
 	},
 	"overrideCommand": true,
-	"features": {
-	},
+	"features": {}
 }
