@@ -23,12 +23,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = environ.get('DJANGO_SECRET_KEY')
 
+
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = environ.get('DJANGO_APP_DEBUG', False) == 'True'
+DEBUG = environ.get('DJANGO_APP_DEBUG') == 'True'
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = environ.get('DJANGO_ALLOWED_HOSTS', '').split(' ')
 
-
+print(ALLOWED_HOSTS)
 # Application definition
 
 INSTALLED_APPS = [
@@ -55,7 +56,7 @@ ROOT_URLCONF = 'core.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'core/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -76,8 +77,12 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': environ.get('DB_NAME'),
+        'HOST': environ.get('DB_HOST'),
+        'PORT': environ.get('DB_PORT'),
+        'USER': environ.get('DB_USER'),
+        'PASSWORD': environ.get('DB_PASSWORD'),
     }
 }
 
@@ -124,14 +129,29 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # The time in seconds that the browser should remember that the site is only to be accessed using HTTPS.
-SECURE_HSTS_SECONDS = 3600
+# app_enviroment = environ.get('APP_ENVIRONMENT', 'production')
+SECURE_HSTS_SECONDS = environ.get('DJANGO_SECURE_HSTS_SECONDS', 0)
 
-SECURE_SSL_REDIRECT = True
+SECURE_SSL_REDIRECT = environ.get('DJANGO_SECURE_SSL_REDIRECT') == 'True'
 
-SESSION_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = environ.get('DJANGO_SESSION_COOKIE_SECURE') == 'True'
 
-CSRF_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = environ.get('DJANGO_CSRF_COOKIE_SECURE') == 'True'
 
-SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_INCLUDE_SUBDOMAINS = environ.get('DJANGO_SECURE_HSTS_INCLUDE_SUBDOMAINS') == 'True'
 
-SECURE_HSTS_PRELOAD = True
+SECURE_HSTS_PRELOAD = environ.get('DJANGO_SECURE_HSTS_PRELOAD') == 'True'
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+        },
+    },
+    "root": {
+        "handlers": ["console"],
+        "level": "WARNING",
+    },
+}

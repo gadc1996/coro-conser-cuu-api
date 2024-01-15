@@ -4,6 +4,14 @@ FROM python:3.12-slim-bullseye
 # Set the working directory to /app
 WORKDIR /app
 
+
+# Install apt-get packages
+RUN apt-get update && \
+    apt-get install -y \
+    pkg-config \
+    default-libmysqlclient-dev \
+    gcc
+
 # copy the requirements file used for dependencies
 COPY requirements.txt .
 

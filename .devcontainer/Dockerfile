@@ -1,25 +1,48 @@
-FROM python:3.11-slim-bullseye
+FROM python:3.12-slim-bullseye
 
+# Set the working directory to /app
 WORKDIR /app
+
+# Install apt-get workspace packages
+RUN apt-get update && \
+    apt-get install -y \
+    git \
+    sudo \
+    zsh
+
+# Install mysql required packages
+RUN apt-get install -y \
+    default-libmysqlclient-dev \
+    pkg-config \
+    gcc
+
+# Install Google Cloud SDK
+RUN apt-get install -y curl apt-transport-https ca-certificates gnupg && \
+    echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && \
+    curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key --keyring /usr/share/keyrings/cloud.google.gpg add - && \
+    apt-get update -y && \
+    apt-get install -y \
+    google-cloud-sdk \
+    google-cloud-sdk-gke-gcloud-auth-plugin \
+    kubectl \
+    google-cloud-sdk-skaffold \
+    google-cloud-sdk-minikube
 
 # Create user with permissions in folder /app
 ARG USERNAME=devcontainer
 RUN useradd -ms /bin/bash $USERNAME && \
     chown -R $USERNAME:$USERNAME /app
 
+# add user to sudoers
+RUN echo "$USERNAME ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+
+# Set zsh as default shell for user
+RUN chsh -s $(which zsh) $USERNAME
+    
 # Update pip and install requirements
 COPY requirements.txt .
 RUN pip install --upgrade pip && \
     pip install -r requirements.txt
-
-# Install apt-get packages
-RUN apt-get update && \
-    apt-get install -y \
-    git \
-    sudo
-
-# add user to sudoers
-RUN echo "$USERNAME ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 # Add pip to path
 ENV PATH="/home/$USERNAME/.local/bin:${PATH}"
@@ -28,3 +51,4 @@ ENV PATH="/home/$USERNAME/.local/bin:${PATH}"
 COPY . .
 
 USER $USERNAME
+
