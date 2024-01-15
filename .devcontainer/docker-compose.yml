@@ -9,8 +9,12 @@ services:
       - workspace
     volumes:
       - ..:/app
+    # Set services env variables
     env_file:
       - ../.env.dev
+    # Set workspace env variables
+    environment:
+      - ZDOTDIR=/app/.dotfiles
 
   mysql:
     image: mysql:latest

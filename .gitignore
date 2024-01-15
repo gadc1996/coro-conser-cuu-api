@@ -281,3 +281,8 @@ pyrightconfig.json
 .gnupg
 .local
 .devcontainer/*CommandMarker
+
+# env files except .env.example
+!.env.example
+.env*
+
