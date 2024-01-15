@@ -8,6 +8,7 @@ RUN apt-get update && \
     apt-get install -y \
     git \
     sudo \
+    wget \
     zsh
 
 # Install mysql required packages
@@ -27,6 +28,11 @@ RUN apt-get install -y curl apt-transport-https ca-certificates gnupg && \
     kubectl \
     google-cloud-sdk-skaffold \
     google-cloud-sdk-minikube
+
+# Install Google Cloud SQL Proxy
+RUN wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O cloud_sql_proxy && \
+    chmod +x cloud_sql_proxy && \
+    mv cloud_sql_proxy /usr/local/bin/
 
 # Create user with permissions in folder /app
 ARG USERNAME=devcontainer
