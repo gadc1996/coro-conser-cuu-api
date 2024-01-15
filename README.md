@@ -1,3 +1,6 @@
+# Django Workspace
+The main objetive of this repository is to serve as a fullstack django workspace, with integration with Google Cloud services, and powered by dev containers for development
+
 ## Development setup
 - Create a `.env.dev` file using example
 ```
