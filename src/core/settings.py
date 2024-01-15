@@ -29,7 +29,6 @@ DEBUG = environ.get('DJANGO_APP_DEBUG') == 'True'
 
 ALLOWED_HOSTS = environ.get('DJANGO_ALLOWED_HOSTS', '').split(' ')
 
-print(ALLOWED_HOSTS)
 # Application definition
 
 INSTALLED_APPS = [
@@ -39,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'gcloud'
 ]
 
 MIDDLEWARE = [
