@@ -1,4 +1,4 @@
-FROM python:3.12-slim-bullseye
+FROM python:3.11-slim-bullseye
 
 # Set the working directory to /app
 WORKDIR /app
@@ -16,23 +16,6 @@ RUN apt-get install -y \
     default-libmysqlclient-dev \
     pkg-config \
     gcc
-
-# Install Google Cloud SDK
-RUN apt-get install -y curl apt-transport-https ca-certificates gnupg && \
-    echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && \
-    curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key --keyring /usr/share/keyrings/cloud.google.gpg add - && \
-    apt-get update -y && \
-    apt-get install -y \
-    google-cloud-sdk \
-    google-cloud-sdk-gke-gcloud-auth-plugin \
-    kubectl \
-    google-cloud-sdk-skaffold \
-    google-cloud-sdk-minikube
-
-# Install Google Cloud SQL Proxy
-RUN wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O cloud_sql_proxy && \
-    chmod +x cloud_sql_proxy && \
-    mv cloud_sql_proxy /usr/local/bin/
 
 # Create user with permissions in folder /app
 ARG USERNAME=devcontainer
@@ -58,3 +41,5 @@ COPY . .
 
 USER $USERNAME
 
+# Install AWS Eb Cli
+RUN pip install awsebcli --upgrade --user
