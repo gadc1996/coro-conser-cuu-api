@@ -1,10 +1,9 @@
-from django.views.generic import TemplateView
-from os import environ
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework.reverse import reverse
 
-class CoreView(TemplateView):
-    template_name = "index.html"
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['env'] = environ
-        return context
+@api_view(['GET'])
+def api_root(request, format=None):
+    return Response({
+        # Add more endpoints here
+    })

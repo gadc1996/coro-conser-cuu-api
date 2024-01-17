@@ -15,10 +15,19 @@ import environ
 
 env = environ.Env(
     DJANGO_SECRET_KEY=(str, ''),
+    DJANGO_APP_DEBUG=(bool, False),
+    DJANGO_SECURE_HSTS_SECONDS=(int, 0),
+    DJANGO_SECURE_SSL_REDIRECT=(bool, False),
+    DJANGO_SESSION_COOKIE_SECURE=(bool, False),
+    DJANGO_CSRF_COOKIE_SECURE=(bool, False),
+    DJANGO_SECURE_HSTS_INCLUDE_SUBDOMAINS=(bool, False),
+    DJANGO_SECURE_HSTS_PRELOAD=(bool, False),
+    DJANGO_ALLOWED_HOSTS=(list, []),
     RDS_DB_NAME=(str, ''),
     RDS_USERNAME=(str, ''),
     RDS_PASSWORD=(str, ''),
     RDS_HOSTNAME=(str, ''),
+    RDS_PORT=(str, ''),
 )
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -31,9 +40,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = env('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = env('DJANGO_APP_DEBUG')
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = env('DJANGO_ALLOWED_HOSTS')
 
 # Application definition
 
@@ -44,6 +53,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
@@ -135,17 +145,17 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # The time in seconds that the browser should remember that the site is only to be accessed using HTTPS.
 # app_enviroment = environ.get('APP_ENVIRONMENT', 'production')
-SECURE_HSTS_SECONDS = False
+SECURE_HSTS_SECONDS = env('DJANGO_SECURE_HSTS_SECONDS')
 
-SECURE_SSL_REDIRECT = False
+SECURE_SSL_REDIRECT = env('DJANGO_SECURE_SSL_REDIRECT')
 
-SESSION_COOKIE_SECURE = False
+SESSION_COOKIE_SECURE = env('DJANGO_SESSION_COOKIE_SECURE')
 
-CSRF_COOKIE_SECURE = False
+CSRF_COOKIE_SECURE = env('DJANGO_CSRF_COOKIE_SECURE')
 
-SECURE_HSTS_INCLUDE_SUBDOMAINS = False
+SECURE_HSTS_INCLUDE_SUBDOMAINS = env('DJANGO_SECURE_HSTS_INCLUDE_SUBDOMAINS')
 
-SECURE_HSTS_PRELOAD = False
+SECURE_HSTS_PRELOAD = env('DJANGO_SECURE_HSTS_PRELOAD')
 
 LOGGING = {
     "version": 1,
