@@ -22,6 +22,8 @@ RUN pip install gunicorn
 # Copy the rest of the working directory contents into the container at /app
 COPY src/. .
 
-# Expose port 8080 and run the application
+# Expose port 8080 
 EXPOSE 8080
+# Copy entrypoint and run the application
+COPY entrypoint.py .
 ENTRYPOINT python entrypoint.py
