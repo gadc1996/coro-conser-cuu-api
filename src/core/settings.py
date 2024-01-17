@@ -11,32 +11,24 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
-# import environ
-from os import environ
+import environ
 
+env = environ.Env(
+    DJANGO_SECRET_KEY=(str, ''),
+    RDS_DB_NAME=(str, ''),
+    RDS_USERNAME=(str, ''),
+    RDS_PASSWORD=(str, ''),
+    RDS_HOSTNAME=(str, ''),
+)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
-# env = environ.Env(
-#     DJANGO_APP_DEBUG=(bool, False),
-#     DJANGO_SECURE_HSTS_SECONDS=(int, 0),
-#     DJANGO_SECURE_SSL_REDIRECT=(bool, False),
-#     DJANGO_SESSION_COOKIE_SECURE=(bool, False),
-#     DJANGO_CSRF_COOKIE_SECURE=(bool, False),
-#     DJANGO_SECURE_HSTS_INCLUDE_SUBDOMAINS=(bool, False),
-#     DJANGO_SECURE_HSTS_PRELOAD=(bool, False),
-#     DJANGO_ALLOWED_HOSTS=(list, []),
-#     DJANGO_SECRET_KEY=(str, ''),
-# )
-
-# Read.env.dev file that is in the parent directory from BASE_DIR
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = environ['DJANGO_SECRET_KEY']
+SECRET_KEY = env('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -91,11 +83,11 @@ WSGI_APPLICATION = 'core.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': environ['RDS_DB_NAME'],
-        'USER': environ['RDS_USERNAME'],
-        'PASSWORD': environ['RDS_PASSWORD'],
-        'HOST': environ['RDS_HOSTNAME'],
-        'PORT': environ['RDS_PORT'],
+        'NAME': env('RDS_DB_NAME'),
+        'USER': env('RDS_USERNAME'),
+        'PASSWORD': env('RDS_PASSWORD'),
+        'HOST': env('RDS_HOSTNAME'),
+        'PORT': env('RDS_PORT'),
     }
 }
 
