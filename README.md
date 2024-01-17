@@ -17,17 +17,19 @@ cp .env.example .env.dev
     1. Press `F1` to open the command palette.
     2. Type `Remote-Containers: Reopen in Container` and select it from the dropdown list.
 
-## Interacting with google cloud
-The workspace has comes with [Google Cloud Cli](https://cloud.google.com/sdk/docs?hl=es-419), [Cloud SQl Proxy](https://cloud.google.com/sql/docs/mysql/sql-proxy?hl=es-419), and some convenience scripts that can be run using [django-manage](https://docs.djangoproject.com/en/5.0/ref/django-admin/)
+## Interacting with AWS
+The workspace has comes with [eb-cli](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/eb-cli3.html), preinstalled, add credentials as env variables in [.env.dev](.env.dev)
 
-### Setting up
-- Define GCLOUD env variables, check [.env.example](.env.example) for more information.
-- Run setup script
+Also, some convenience scripts are placed in aws directory
+
+### Managing remote env variables
+To define variables in cloud instance, create a file named .env.aws, this will be loaded to the
+enviroment when running
 ```
-manage gcsetup
+python aws/setup.py
 ```
 
-
-### Setting remote env variables
-A set of env variables are required when deploying to google cloud, define all of them in a .env.gcloud file, then run
-`manage gcsetenv`
+or update the active enviroment using
+```
+python aws/setenv.py
+```
