@@ -24,4 +24,4 @@ COPY src/. .
 
 # Expose port 8080 and run the application
 EXPOSE 8080
-ENTRYPOINT ["gunicorn", "--bind", "0.0.0.0:8080", "core.wsgi:application"]
+ENTRYPOINT python manage.py migrate && gunicorn --bind 0.0.0.0:8080 core.wsgi:application
