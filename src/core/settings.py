@@ -157,6 +157,8 @@ SECURE_HSTS_INCLUDE_SUBDOMAINS = env('DJANGO_SECURE_HSTS_INCLUDE_SUBDOMAINS')
 
 SECURE_HSTS_PRELOAD = env('DJANGO_SECURE_HSTS_PRELOAD')
 
+STATIC_URL = '/static/'
+
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
