@@ -269,11 +269,6 @@ poetry.toml
 pyrightconfig.json
 
 # End of https://www.toptal.com/developers/gitignore/api/django,python
-# Elastic Beanstalk Files
-.elasticbeanstalk/
-.elasticbeanstalk/*
-!.elasticbeanstalk/*.cfg.yml
-!.elasticbeanstalk/*.global.yml
 
 .bash_history
 .ssh
@@ -285,4 +280,5 @@ pyrightconfig.json
 # env files except .env.example
 !.env.example
 .env*
+
 

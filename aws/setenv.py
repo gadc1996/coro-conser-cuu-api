@@ -1,25 +1,27 @@
 from os import environ
-from pathlib import Path
 import subprocess
+import click
+import sys
 
-AWS_ENV_FILE = environ.get('AWS_ENV_FILE', '.env.aws')
+import _parseenv
+import _log as log
 
-def main():
-    file_path = Path(__file__).resolve().parent.parent / AWS_ENV_FILE
+AWS_ENV_FILE = environ.get("AWS_ENV_FILE", ".env.aws")
 
+
+@click.command()
+def setenv():
+    """Set environment variables in AWS Elastic Beanstalk"""
+    env_vars = _parseenv.as_list(AWS_ENV_FILE)
+    command = ["eb", "setenv"]
+   
     try:
-        with open(file_path) as file:
-            lines = file.readlines()
+        subprocess.run(command + env_vars, check=True)
+    except subprocess.CalledProcessError:
+        log.error("Failed to set environment variables in AWS Elastic Beanstalk")
+    else:
+        log.success("Set environment variables in AWS Elastic Beanstalk")
 
-        env_vars = [line.strip() for line in lines if line.strip() and not line.startswith('#')]
-        command = ['eb', 'setenv']
-        command.extend(env_vars)
-        subprocess.run(command, check=True)
-        
 
-        
-    except FileNotFoundError:
-        print(f"File {AWS_ENV_FILE} was not found, please create it, file name can be set using env variable AWS_ENV_FILE.")
-        
-if __name__ == '__main__':
-    main()
+if __name__ == "__main__":
+    setenv()

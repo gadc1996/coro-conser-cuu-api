@@ -11,13 +11,11 @@
 				"GitHub.copilot",
 				"GitHub.vscode-github-actions",
 				"ms-python.python",
-				"googlecloudtools.cloudcode",
 				"ms-python.black-formatter"
 			]
 		}
 	},
 	"overrideCommand": true,
 	"features": {
-		// "ghcr.io/devcontainers/features/docker-in-docker:2": {}
 	}
 }
