@@ -9,13 +9,17 @@ services:
       - workspace
     volumes:
       - ..:/app
-    # Variables used inside the container
-    # environment:
-    #   - ZDOTDIR=/home/devcontainer
-    
-    # Use and env file and create an example file when using external services(credentials, api keys, etc)
+    # Set services env variables
     env_file:
-      - .env
+      - ../.env.dev
+    # Set workspace env variables
+    environment:
+      - ZDOTDIR=/app/.dotfiles
+      - RDS_DB_NAME=development_db
+      - RDS_USERNAME=root
+      - RDS_PASSWORD=root
+      - RDS_HOSTNAME=mysql
+      - RDS_PORT=3306
 
   mysql:
     image: mysql:latest
@@ -23,7 +27,7 @@ services:
       - workspace
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: django_db
+      MYSQL_DATABASE: development_db
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
