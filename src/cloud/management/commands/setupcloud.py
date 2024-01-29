@@ -28,16 +28,22 @@ def _validate_env_vars() -> None:
         if not globals().get(var):
             log.error(f"Please set {var} environment variable.")
             sys.exit(1)
-    
+
     log.success("Validated environment variables")
-            
-    
 
 
 def _setup_app() -> None:
     try:
         subprocess.run(
-            ["eb", "init", "--platform", AWS_PLATFORM, "--region", AWS_REGION, APP_NAME],
+            [
+                "eb",
+                "init",
+                "--platform",
+                AWS_PLATFORM,
+                "--region",
+                AWS_REGION,
+                APP_NAME,
+            ],
             check=True,
         )
     except subprocess.CalledProcessError:

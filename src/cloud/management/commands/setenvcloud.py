@@ -14,7 +14,7 @@ def setenv():
     """Set environment variables in AWS Elastic Beanstalk"""
     env_vars = _parseenv.as_list(AWS_ENV_FILE)
     command = ["eb", "setenv"]
-   
+
     try:
         subprocess.run(command + env_vars, check=True)
     except subprocess.CalledProcessError:

@@ -1,7 +1,7 @@
 import click
-from setenv import setenv
-from setup import setup
-from clean import clean
+from cloud.management.commands.setenvcloud import setenv
+from cloud.management.commands.setupcloud import setup
+from cloud.management.commands.cleancloud import clean
 
 
 @click.group()

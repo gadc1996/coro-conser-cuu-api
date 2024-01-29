@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "coro-conser-cuu"
+version = "0.1.0"
+description = ""
+authors = ["Alex Delgado <gadc1996@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+Django = "4.1.13"
+django-filter = "23.5"
+djangorestframework = "3.14.0"
+mysqlclient = "2.2.1"
+python-environ = "0.4.54"
+django-storages = {extras = ["boto3"], version = "^1.14.2"}
+pillow = "^10.2.0"
+
+[tool.poetry.group.dev.dependencies]
+awsebcli = "3.20.10"
+black = "24.1.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

@@ -15,6 +15,7 @@ services:
     # Set workspace env variables
     environment:
       - ZDOTDIR=/app/.dotfiles
+      - POETRY_VIRTUALENVS_CREATE=false
       - RDS_DB_NAME=development_db
       - RDS_USERNAME=root
       - RDS_PASSWORD=root

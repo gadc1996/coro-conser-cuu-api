@@ -1,12 +1,9 @@
-import click
 import subprocess
 
 import _log as log
 
 
-@click.command()
 def clean():
-    """Clean up AWS Elastic Beanstalk application and environment"""
     command = ["eb", "terminate", "--all", "--force"]
     try:
         subprocess.run(command, check=True)
