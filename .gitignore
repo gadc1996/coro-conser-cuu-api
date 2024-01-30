@@ -283,6 +283,7 @@ pyrightconfig.json
 
 
 
+
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml

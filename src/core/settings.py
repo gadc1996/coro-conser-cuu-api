@@ -11,27 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
-import environ
-
-env = environ.Env(
-    DJANGO_SECRET_KEY=(str, ""),
-    DJANGO_APP_DEBUG=(bool, False),
-    DJANGO_SECURE_HSTS_SECONDS=(int, 0),
-    DJANGO_SECURE_SSL_REDIRECT=(bool, False),
-    DJANGO_SESSION_COOKIE_SECURE=(bool, False),
-    DJANGO_CSRF_COOKIE_SECURE=(bool, False),
-    DJANGO_SECURE_HSTS_INCLUDE_SUBDOMAINS=(bool, False),
-    DJANGO_SECURE_HSTS_PRELOAD=(bool, False),
-    DJANGO_ALLOWED_HOSTS=(list, []),
-    RDS_DB_NAME=(str, ""),
-    RDS_USERNAME=(str, ""),
-    RDS_PASSWORD=(str, ""),
-    RDS_HOSTNAME=(str, ""),
-    RDS_PORT=(str, ""),
-    AWS_ACCESS_KEY_ID=(str, ""),
-    AWS_SECRET_ACCESS_KEY=(str, ""),
-    AWS_STORAGE_BUCKET_NAME=(str, ""),
-)
+from utils.env import env
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent

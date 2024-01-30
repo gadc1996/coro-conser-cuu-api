@@ -1,27 +1,22 @@
-from os import environ
+from django.core.management.base import BaseCommand
+from termcolor import cprint
 import subprocess
-import click
-import sys
 
-import _parseenv
-import _log as log
-
-AWS_ENV_FILE = environ.get("AWS_ENV_FILE", ".env.aws")
+from src.utils.env import env, EnvFile
 
 
-@click.command()
-def setenv():
-    """Set environment variables in AWS Elastic Beanstalk"""
-    env_vars = _parseenv.as_list(AWS_ENV_FILE)
-    command = ["eb", "setenv"]
+class Command(BaseCommand):
+    help = "Set environment variables in AWS Elastic Beanstalk"
 
-    try:
-        subprocess.run(command + env_vars, check=True)
-    except subprocess.CalledProcessError:
-        log.error("Failed to set environment variables in AWS Elastic Beanstalk")
-    else:
-        log.success("Set environment variables in AWS Elastic Beanstalk")
+    def handle(self, *args, **options):
+        env_vars = EnvFile(env("CLOUD_ENV_FILE")).as_list()
+        command = ["eb", "setenv"]
 
-
-if __name__ == "__main__":
-    setenv()
+        try:
+            subprocess.run(command + env_vars, check=True)
+        except subprocess.CalledProcessError:
+            cprint(
+                "Failed to set environment variables in AWS Elastic Beanstalk", "red"
+            )
+        else:
+            cprint("Set environment variables in AWS Elastic Beanstalk", "green")

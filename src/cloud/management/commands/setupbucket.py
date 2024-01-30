@@ -1,18 +1,11 @@
 import subprocess
-import environ
 from django.core.management.base import BaseCommand
+
+from src.utils import env
 
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
-        env = environ.Env(
-            AWS_BUCKET_NAME=(str, ""),
-            AWS_REGION=(str, ""),
-        )
-        if not env("AWS_BUCKET_NAME"):
-            raise ValueError("AWS_BUCKET_NAME is not set")
-        if not env("AWS_REGION"):
-            raise ValueError("AWS_REGION is not set")
         try:
             subprocess.run(
                 [

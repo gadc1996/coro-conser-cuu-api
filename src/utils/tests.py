@@ -1,6 +1,6 @@
 from django.test import SimpleTestCase
 
-from utils.parseenv import EnvFile
+from utils.env import EnvFile
 
 
 class ParseEnvTestCase(SimpleTestCase):

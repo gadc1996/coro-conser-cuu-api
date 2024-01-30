@@ -1,21 +1,11 @@
-import environ
-import sys
 import subprocess
 import secrets
-
 from typing import Any
 
 from django.core.management.base import BaseCommand
 from termcolor import cprint
 
-from utils.parseenv import EnvFile
-
-env = environ.Env(
-    AWS_REGION=(str, ""),
-    AWS_PLATFORM=(str, ""),
-    APP_NAME=(str, ""),
-    CLOUD_ENV_FILE=(str, ".env.cloud"),
-)
+from utils.env import env, EnvFile
 
 
 class Command(BaseCommand):
@@ -43,7 +33,9 @@ class Command(BaseCommand):
                 check=True,
             )
         except subprocess.CalledProcessError as e:
-            cprint(f"Failed to setup AWS Elastic Beanstalk application, Error: {e}", "red")
+            cprint(
+                f"Failed to setup AWS Elastic Beanstalk application, Error: {e}", "red"
+            )
         else:
             cprint("Setup AWS Elastic Beanstalk application", "green")
 
@@ -69,7 +61,9 @@ class Command(BaseCommand):
         try:
             subprocess.run(command, check=True)
         except subprocess.CalledProcessError as e:
-            cprint(f"Failed to setup AWS Elastic Beanstalk environment, Error: {e}", "red")
+            cprint(
+                f"Failed to setup AWS Elastic Beanstalk environment, Error: {e}", "red"
+            )
         else:
             cprint("Setup AWS Elastic Beanstalk environment", "green")
 
