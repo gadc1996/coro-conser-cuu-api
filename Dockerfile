@@ -27,4 +27,4 @@ COPY src/. .
 EXPOSE 8080
 
 # Run migrations and start server
-ENTRYPOINT entrypoint.sh
+ENTRYPOINT ./entrypoint.sh
