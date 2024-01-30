@@ -22,6 +22,7 @@ RUN poetry install --with deploy --no-root
 
 # Copy the rest of the working directory contents into the container at /app
 COPY src/. .
+COPY entrypoint.sh .
 
 # Expose port 8080
 EXPOSE 8080
