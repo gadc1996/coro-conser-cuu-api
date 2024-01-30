@@ -1,6 +1,4 @@
 import subprocess
-from django.contrib.auth.models import User
-from django.conf import settings
 
 
 def runserver():
@@ -28,19 +26,7 @@ def collectstatic():
     )
 
 
-def create_superuser():
-    if not User.objects.filter(
-        username=f"{settings.DJANGO_SUPERUSER_USERNAME}"
-    ).exists():
-        User.objects.create_superuser(
-            f"{settings.DJANGO_SUPERUSER_USERNAME}",
-            f"{settings.DJANGO_SUPERUSER_EMAIL}",
-            f"{settings.DJANGO_SUPERUSER_PASSWORD}",
-        )
-
-
 if __name__ == "__main__":
     migrate()
     collectstatic()
-    create_superuser()
     runserver()
