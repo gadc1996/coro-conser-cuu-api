@@ -30,6 +30,9 @@ ENV = environ.Env(
     DJANGO_SECURE_HSTS_INCLUDE_SUBDOMAINS=(bool, False),
     DJANGO_SECURE_HSTS_PRELOAD=(bool, False),
     DJANGO_ALLOWED_HOSTS=(list, []),
+    DJANGO_SUPERUSER_USERNAME=(list, []),
+    DJANGO_SUPERUSER_PASSWORD=(list, []),
+    DJANGO_SUPERUSER_EMAIL=(list, []),
     RDS_DB_NAME=(str, ""),
     RDS_USERNAME=(str, ""),
     RDS_PASSWORD=(str, ""),
@@ -113,8 +116,8 @@ AWS_SECRET_ACCESS_KEY = ENV("AWS_SECRET_ACCESS_KEY")
 AWS_ACCESS_KEY_ID = ENV("AWS_ACCESS_KEY_ID")
 AWS_STORAGE_BUCKET_NAME = ENV("AWS_STORAGE_BUCKET_NAME")
 DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
-STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-STATIC_URL = f'https://{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com/'
+STATICFILES_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+STATIC_URL = f"https://{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com/"
 
 
 # Password validation

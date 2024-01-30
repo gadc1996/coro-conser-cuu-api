@@ -2,9 +2,9 @@ from django.core.management.base import BaseCommand
 import subprocess
 from termcolor import cprint
 
+
 class Command(BaseCommand):
     help = "Deploy application version"
-
 
     def handle(self, *args, **options):
         cprint("Deploying application version", "green")

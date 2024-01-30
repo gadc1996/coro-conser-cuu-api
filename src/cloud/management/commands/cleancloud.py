@@ -12,7 +12,7 @@ def clean():
             "red",
         )
     else:
-        cprint("Cleaned up AWS Elastic Beanstalk application and environment", 'green')
+        cprint("Cleaned up AWS Elastic Beanstalk application and environment", "green")
 
 
 if __name__ == "__main__":
