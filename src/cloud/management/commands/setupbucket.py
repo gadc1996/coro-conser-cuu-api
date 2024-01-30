@@ -2,6 +2,7 @@ import subprocess
 import environ
 from django.core.management.base import BaseCommand
 
+
 class Command(BaseCommand):
     def handle(self, *args, **options):
         env = environ.Env(
@@ -30,6 +31,7 @@ class Command(BaseCommand):
             )
         except subprocess.CalledProcessError as e:
             print(f"Command failed with error: {e.stderr.decode()}")
+
 
 if __name__ == "__main__":
     Command().handle()

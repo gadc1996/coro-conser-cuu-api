@@ -12,7 +12,13 @@ RUN apt-get update && \
     gcc
 
 # Install poetry
-RUN pipx install poetry
+RUN pip install poetry
+
+# Copy poetry files
+COPY pyproject.toml poetry.lock ./
+
+# Install poetry dependencies
+RUN poetry install --with deploy --no-root
 
 # Copy the rest of the working directory contents into the container at /app
 COPY src/. .
@@ -21,4 +27,4 @@ COPY src/. .
 EXPOSE 8080
 
 # Run migrations and start server
-ENTRYPOINT python manage.py migrate && gunicorn --bind 0.0.0.0:8080 core.wsgi:application
+ENTRYPOINT poetry run gunicorn --bind 0.0.0.0:8080 core.wsgi:application

@@ -23,7 +23,7 @@ from concerts.views import ConcertViewSet
 
 router = DefaultRouter()
 
-router.register(r'concerts', ConcertViewSet, basename='concert')
+router.register(r"concerts", ConcertViewSet, basename="concert")
 
 urlpatterns = [
     path("api/", include(router.urls)),
