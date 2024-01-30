@@ -22,11 +22,10 @@ RUN poetry install --with deploy --no-root
 
 # Copy the rest of the working directory contents into the container at /app
 COPY src/. .
-COPY entrypoint.sh .
 
 # Expose port 8080
 EXPOSE 8080
 
 # Run migrations and start server
 # ENTRYPOINT poetry run gunicorn --bind 0.0.0.0:8080 core.wsgi:application
-ENTRYPOINT bash ./entrypoint.sh
+ENTRYPOINT python main.py
