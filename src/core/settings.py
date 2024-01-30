@@ -113,6 +113,8 @@ AWS_SECRET_ACCESS_KEY = ENV("AWS_SECRET_ACCESS_KEY")
 AWS_ACCESS_KEY_ID = ENV("AWS_ACCESS_KEY_ID")
 AWS_STORAGE_BUCKET_NAME = ENV("AWS_STORAGE_BUCKET_NAME")
 DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+STATIC_URL = f'https://{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com/'
 
 
 # Password validation

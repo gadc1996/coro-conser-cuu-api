@@ -26,5 +26,5 @@ COPY src/. .
 # Expose port 8080
 EXPOSE 8080
 
-# Run migrations and start server
+# Start app
 ENTRYPOINT python main.py
