@@ -27,4 +27,4 @@ COPY src/. .
 EXPOSE 8080
 
 # Run migrations and start server
-ENTRYPOINT ./entrypoint.sh
+ENTRYPOINT poetry run python manage.py migrate && poetry run python manage.py collectstatic --no-input && poetry run python manage.py runserver
