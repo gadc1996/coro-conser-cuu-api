@@ -288,3 +288,4 @@ pyrightconfig.json
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
+.ebextensions/env.yaml

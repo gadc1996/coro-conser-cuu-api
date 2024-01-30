@@ -4,8 +4,6 @@ import subprocess
 def runserver():
     subprocess.run(
         [
-            "poetry",
-            "run",
             "gunicorn",
             "--bind",
             "0.0.0.0:8080",
@@ -16,12 +14,12 @@ def runserver():
 
 
 def migrate():
-    subprocess.run(["poetry", "run", "python", "manage.py", "migrate"], check=True)
+    subprocess.run(["python", "manage.py", "migrate"], check=True)
 
 
 def collectstatic():
     subprocess.run(
-        ["poetry", "run", "python", "manage.py", "collectstatic", "--noinput"],
+        ["python", "manage.py", "collectstatic", "--noinput"],
         check=True,
     )
 

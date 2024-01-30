@@ -18,5 +18,5 @@
     "-p",
     "test*.py"
   ],
-  "python.envFile": "${workspaceFolder}/.env.dev"
+  "python.envFile": "${workspaceFolder}/.env"
 }
