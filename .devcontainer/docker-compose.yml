@@ -11,7 +11,7 @@ services:
       - ..:/app
     # Set services env variables
     env_file:
-      - .env
+      - ../.env
     # Set workspace env variables
     environment:
       - ZDOTDIR=/app/.dotfiles
