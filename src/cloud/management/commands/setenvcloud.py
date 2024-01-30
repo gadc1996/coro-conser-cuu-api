@@ -1,15 +1,17 @@
-from django.core.management.base import BaseCommand
 from termcolor import cprint
 import subprocess
 
-from utils.env import env, EnvFile
+from django.conf import settings
+from django.core.management.base import BaseCommand
+
+from utils.env import EnvFile
 
 
 class Command(BaseCommand):
     help = "Set environment variables in AWS Elastic Beanstalk"
 
     def handle(self, *args, **options):
-        env_vars = EnvFile(env("CLOUD_ENV_FILE")).as_list()
+        env_vars = EnvFile(settings.ENV("CLOUD_ENV_FILE")).as_list()
         command = ["eb", "setenv"]
 
         try:

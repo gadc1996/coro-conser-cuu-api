@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from pathlib import Path
 import environ
 
-env = environ.Env(
+ENV = environ.Env(
     APP_NAME=(str, ""),
     AWS_ACCESS_KEY_ID=(str, ""),
     AWS_SECRET_ACCESS_KEY=(str, ""),
@@ -44,12 +44,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env("DJANGO_SECRET_KEY")
+SECRET_KEY = ENV("DJANGO_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env("DJANGO_APP_DEBUG")
+DEBUG = ENV("DJANGO_APP_DEBUG")
 
-ALLOWED_HOSTS = env("DJANGO_ALLOWED_HOSTS")
+ALLOWED_HOSTS = ENV("DJANGO_ALLOWED_HOSTS")
 
 # Application definition
 
@@ -101,17 +101,17 @@ WSGI_APPLICATION = "core.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
-        "NAME": env("RDS_DB_NAME"),
-        "USER": env("RDS_USERNAME"),
-        "PASSWORD": env("RDS_PASSWORD"),
-        "HOST": env("RDS_HOSTNAME"),
-        "PORT": env("RDS_PORT"),
+        "NAME": ENV("RDS_DB_NAME"),
+        "USER": ENV("RDS_USERNAME"),
+        "PASSWORD": ENV("RDS_PASSWORD"),
+        "HOST": ENV("RDS_HOSTNAME"),
+        "PORT": ENV("RDS_PORT"),
     }
 }
 
-AWS_SECRET_ACCESS_KEY = env("AWS_SECRET_ACCESS_KEY")
-AWS_ACCESS_KEY_ID = env("AWS_ACCESS_KEY_ID")
-AWS_STORAGE_BUCKET_NAME = env("AWS_STORAGE_BUCKET_NAME")
+AWS_SECRET_ACCESS_KEY = ENV("AWS_SECRET_ACCESS_KEY")
+AWS_ACCESS_KEY_ID = ENV("AWS_ACCESS_KEY_ID")
+AWS_STORAGE_BUCKET_NAME = ENV("AWS_STORAGE_BUCKET_NAME")
 DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 
 
@@ -158,17 +158,17 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # The time in seconds that the browser should remember that the site is only to be accessed using HTTPS.
 # app_enviroment = environ.get('APP_ENVIRONMENT', 'production')
-SECURE_HSTS_SECONDS = env("DJANGO_SECURE_HSTS_SECONDS")
+SECURE_HSTS_SECONDS = ENV("DJANGO_SECURE_HSTS_SECONDS")
 
-SECURE_SSL_REDIRECT = env("DJANGO_SECURE_SSL_REDIRECT")
+SECURE_SSL_REDIRECT = ENV("DJANGO_SECURE_SSL_REDIRECT")
 
-SESSION_COOKIE_SECURE = env("DJANGO_SESSION_COOKIE_SECURE")
+SESSION_COOKIE_SECURE = ENV("DJANGO_SESSION_COOKIE_SECURE")
 
-CSRF_COOKIE_SECURE = env("DJANGO_CSRF_COOKIE_SECURE")
+CSRF_COOKIE_SECURE = ENV("DJANGO_CSRF_COOKIE_SECURE")
 
-SECURE_HSTS_INCLUDE_SUBDOMAINS = env("DJANGO_SECURE_HSTS_INCLUDE_SUBDOMAINS")
+SECURE_HSTS_INCLUDE_SUBDOMAINS = ENV("DJANGO_SECURE_HSTS_INCLUDE_SUBDOMAINS")
 
-SECURE_HSTS_PRELOAD = env("DJANGO_SECURE_HSTS_PRELOAD")
+SECURE_HSTS_PRELOAD = ENV("DJANGO_SECURE_HSTS_PRELOAD")
 
 STATIC_ROOT = "/static/"
 

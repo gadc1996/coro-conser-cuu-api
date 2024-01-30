@@ -1,6 +1,5 @@
 import subprocess
-
-import _log as log
+from termcolor import cprint
 
 
 def clean():
@@ -8,11 +7,12 @@ def clean():
     try:
         subprocess.run(command, check=True)
     except subprocess.CalledProcessError:
-        log.error(
-            "Failed to clean up AWS Elastic Beanstalk application and environment"
+        cprint(
+            "Failed to clean up AWS Elastic Beanstalk application and environment",
+            "red",
         )
     else:
-        log.success("Cleaned up AWS Elastic Beanstalk application and environment")
+        cprint("Cleaned up AWS Elastic Beanstalk application and environment", 'green')
 
 
 if __name__ == "__main__":

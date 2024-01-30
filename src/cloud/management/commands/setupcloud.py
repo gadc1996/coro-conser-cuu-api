@@ -2,10 +2,11 @@ import subprocess
 import secrets
 from typing import Any
 
+from django.conf import settings
 from django.core.management.base import BaseCommand
 from termcolor import cprint
 
-from utils.env import env, EnvFile
+from utils.env import EnvFile
 
 
 class Command(BaseCommand):
@@ -21,10 +22,10 @@ class Command(BaseCommand):
             "eb",
             "init",
             "--platform",
-            env("AWS_PLATFORM"),
+            settings.ENV("AWS_PLATFORM"),
             "--region",
-            env("AWS_REGION"),
-            env("APP_NAME"),
+            settings.ENV("AWS_REGION"),
+            settings.ENV("APP_NAME"),
         ]
 
         try:
@@ -40,14 +41,14 @@ class Command(BaseCommand):
             cprint("Setup AWS Elastic Beanstalk application", "green")
 
     def _setup_enviroment(self) -> None:
-        env_file = EnvFile(env("CLOUD_ENV_FILE"))
+        env_file = EnvFile(settings.ENV("CLOUD_ENV_FILE"))
         command = [
             "eb",
             "create",
-            f"{env('APP_NAME')}-dev",
+            f"{settings.ENV('APP_NAME')}-dev",
             "--single",
             "--cname",
-            f"{env('APP_NAME')}-dev",
+            f"{settings.ENV('APP_NAME')}-dev",
             "--envvars",
             env_file.as_string(),
             "--database",

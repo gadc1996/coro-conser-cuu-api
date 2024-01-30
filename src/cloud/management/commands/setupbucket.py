@@ -1,7 +1,7 @@
 import subprocess
 from django.core.management.base import BaseCommand
 
-from src.utils import env
+from django.conf import settings
 
 
 class Command(BaseCommand):
@@ -13,11 +13,11 @@ class Command(BaseCommand):
                     "s3api",
                     "create-bucket",
                     "--bucket",
-                    env("AWS_BUCKET_NAME"),
+                    settings.ENV("AWS_BUCKET_NAME"),
                     "--region",
-                    env("AWS_REGION"),
+                    settings.ENV("AWS_REGION"),
                     "--create-bucket-configuration",
-                    f"LocationConstraint={env('AWS_REGION')}",
+                    f"LocationConstraint={settings.ENV('AWS_REGION')}",
                 ],
                 check=True,
                 stderr=subprocess.PIPE,
