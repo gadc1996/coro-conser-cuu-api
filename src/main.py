@@ -12,6 +12,5 @@ def collectstatic():
     
 if __name__ == "__main__":
     migrate()
-    # collectstatic()
-    runserver()
-    
+    collectstatic()
+    runserver() 
