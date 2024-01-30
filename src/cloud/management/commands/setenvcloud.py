@@ -2,7 +2,7 @@ from django.core.management.base import BaseCommand
 from termcolor import cprint
 import subprocess
 
-from src.utils.env import env, EnvFile
+from utils.env import env, EnvFile
 
 
 class Command(BaseCommand):
