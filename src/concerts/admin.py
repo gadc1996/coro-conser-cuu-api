@@ -6,11 +6,9 @@ from .models import Concert, Score
 
 @admin.register(Concert)
 class ConcertAdmin(admin.ModelAdmin):
-    pass
-    # list_display = ("name", "date", "time", "location", "image")
+    list_display = ("name", "date", "time", "location", "image")
 
 
 @admin.register(Score)
 class ScoreAdmin(admin.ModelAdmin):
-    pass
-    # list_display = ("name", "composer", "date", "image")
+    list_display = ("name", "file", "concert")

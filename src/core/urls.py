@@ -16,10 +16,17 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from .views import api_root
+from rest_framework.routers import DefaultRouter
+from concerts.views import ConcertViewSet
+
+router = DefaultRouter()
+
+router.register(r'concerts', ConcertViewSet, basename='concert')
 
 urlpatterns = [
-    path("", api_root),
+    path("api/", include(router.urls)),
     path("admin/", admin.site.urls),
+    path("", api_root),
 ]

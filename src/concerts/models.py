@@ -19,7 +19,7 @@ class Concert(models.Model):
 
 class Score(models.Model):
     name = models.CharField(max_length=100)
-    concert = models.ForeignKey(Concert, on_delete=models.CASCADE)
+    concert = models.ForeignKey(Concert, on_delete=models.CASCADE, related_name="scores")
     file = models.FileField(blank=True, upload_to="scores/")
 
     def __str__(self):

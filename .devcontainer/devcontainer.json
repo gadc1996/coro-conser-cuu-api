@@ -12,7 +12,8 @@
 				"GitHub.vscode-github-actions",
 				"ms-python.python",
 				"ms-python.black-formatter",
-				"tamasfe.even-better-toml"
+				"tamasfe.even-better-toml",
+				"rangav.vscode-thunder-client"
 			]
 		}
 	},

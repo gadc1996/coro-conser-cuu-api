@@ -7,6 +7,5 @@ from rest_framework.reverse import reverse
 def api_root(request, format=None):
     return Response(
         {
-            # Add more endpoints here
         }
     )
