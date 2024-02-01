@@ -9,6 +9,7 @@ services:
       - workspace
     volumes:
       - ..:/app
+      - ssh-keys:/root/.ssh
     # Set services env variables
     env_file:
       - ../.env
@@ -32,9 +33,6 @@ services:
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
-    environment:
-      PMA_HOST: mysql
-      PMA_PORT: 3306
     ports:
       - "8081:80"
     networks:
@@ -42,3 +40,6 @@ services:
 
 networks:
   workspace:
+    
+volumes:
+  ssh-keys:
