@@ -26,7 +26,6 @@ router = DefaultRouter()
 router.register(r"concerts", ConcertViewSet, basename="concert")
 
 urlpatterns = [
-    path("api/", include(router.urls)),
+    path("", include(router.urls)),
     path("admin/", admin.site.urls),
-    path("", api_root),
 ]

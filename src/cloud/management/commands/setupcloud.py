@@ -65,6 +65,8 @@ class Command(BaseCommand):
             "5",
             "--database.instance",
             "db.t2.micro",
+            "--elb-type",
+            "application",
         ]
         try:
             subprocess.run(command, check=True)
