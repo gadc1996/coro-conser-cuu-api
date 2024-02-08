@@ -46,7 +46,10 @@ class Command(BaseCommand):
             "eb",
             "create",
             f"{settings.ENV('APP_NAME')}-dev",
-            "--single",
+            "-im",
+            "1",
+            "-ix",
+            "1",
             "--cname",
             f"{settings.ENV('APP_NAME')}-dev",
             "--envvars",
@@ -58,6 +61,10 @@ class Command(BaseCommand):
             "ebroot",
             "--database.password",
             secrets.token_urlsafe(16),
+            "--database.size",
+            "5",
+            "--database.instance",
+            "db.t2.micro",
         ]
         try:
             subprocess.run(command, check=True)
@@ -67,7 +74,3 @@ class Command(BaseCommand):
             )
         else:
             cprint("Setup AWS Elastic Beanstalk environment", "green")
-
-
-# if __name__ == "__main__":
-#     setup()
